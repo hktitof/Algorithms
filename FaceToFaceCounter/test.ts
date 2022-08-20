@@ -4,7 +4,7 @@ const direct : { [string:string]:{[string:string]:number} } = {
   "10": { "00": 0, "01": 0, "10": 0, "11": 0 },
   "11": { "00": 0, "01": 0, "10": 0, "11": 0 },
 };
-const indirect = {
+const indirect : { [string:string]:{[string:string]:number} } = {
   "00": { "00": 0, "01": 0, "10": 0, "11": 0 },
   "01": { "00": 0, "01": 0, "10": 0, "11": 0 },
   "10": { "00": 0, "01": 0, "10": 0, "11": 0 },
@@ -20,28 +20,23 @@ function splitToSubstrings(str: string, n:number) {
   return arr;
 }
 //incremnt where to point
-// const point=(first,second)=>{
-//     direct[first]=direct[first][second];
-// }
+
 const test = "11010100110110110110";
 const input_array :string[] = splitToSubstrings(test, 2);
-direct["00"]["00"]=1;
-console.log(direct["00"]);
-// const exDirect = (input:string[])=>{
-//     let current;
-//     let next;
-//     for(let i =0;i<input.length-1;i++){
-//         current=input[i].toString();
-//         console.log("current : ",current);
-//         console.log(direct[current]);
-//         // next=input[i+1];
-//         // input[current]
-//     }
-// }
-
+console.log(input_array.toString());
+const exDirect = (input:string[])=>{
+    for(let i =0;i<input.length-1;i++){
+        direct[input[i].toString()][input[i+1].toString()]++;
+    }
+    console.log(direct);
+}
+const exIndirect = (input:string[])=>{
+    for(let  i=input.length-1;i>0;i--){
+        indirect[input[i].toString()][input[i-1].toString()]++;
+    }
+    console.log(indirect);
+}
 
 //execute
-// exDirect(input_array);
-
-
-// console.log(input_array);
+exDirect(input_array);
+exIndirect(input_array);
